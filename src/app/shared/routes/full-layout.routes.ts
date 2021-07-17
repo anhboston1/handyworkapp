@@ -1,0 +1,22 @@
+import { Routes, RouterModule } from '@angular/router';
+
+//Route for content layout with sidebar, navbar and footer.
+
+export const Full_ROUTES: Routes = [
+  {
+    path: 'dashboard',
+    loadChildren: () => import('../../dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'datatables',
+    loadChildren: () => import('../../data-tables/data-tables.module').then(m => m.DataTablesModule)
+  },
+  {
+    path: 'pages',
+    loadChildren: () => import('../../pages/full-pages/full-pages.module').then(m => m.FullPagesModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('../../chat/chat.module').then(m => m.ChatModule)
+  }
+];

@@ -23,7 +23,7 @@
 
           <a class="list-group-item " [ngClass]="{'selected-chat': user.isActiveChat}"
             *ngFor="let user of usersChat | search:'name':searchQuery" (click)="viewChat(user)">
-            <div class="media chat-list-text py-1" [ngClass]="{'align-items-center': !user.isActiveChat}">
+            <div *ngIf="user !== null && user.userId !== '1'" class="media chat-list-text py-1" [ngClass]="{'align-items-center': !user.isActiveChat}">
               <span class="avatar avatar-md mr-2">
                 <img [src]="user.avatar" alt="Avatar">
                 <span class="avatar-status-{{user.status}}"></span>

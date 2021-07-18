@@ -56,15 +56,9 @@ export class AuthService {
           const user = this.jwtHelper.decodeToken(res.token);
           console.log("res.token = " + res.token);
           console.log(user);
-          if (!user.bus) {
-            throw {
-              code: 401,
-              message: 'User not authorized.',
-            };
-          }
-
+        
           this.authToken.next(res.token);
-          this.currentUser.next(user);
+          this.currentUser.next(user);         
 
           //this.setupRefreshTokenInterval(res.ttl - 30);
         }),
@@ -85,5 +79,17 @@ export class AuthService {
 
   isAuthenticated() {
     return true;
+  }
+
+  getToken(): string {
+    return this.authToken.value;
+  }
+
+  getCurrentUser(): any {
+    return this.currentUser.value;
+  }
+
+  isLoggedIn(): boolean {
+    return this.getToken() != null;
   }
 }

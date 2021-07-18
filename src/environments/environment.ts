@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: '/api',
+  apiUrl: 'http://[::1]:3000/',
 };

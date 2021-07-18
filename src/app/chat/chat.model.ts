@@ -1,5 +1,6 @@
 export class UsersChat {
   userId: string;
+  conversationId: string;
   name: string;
   avatar: string;
   lastChatTime: string;

@@ -17,7 +17,7 @@ export class LoginPageComponent {
   isLoginFailed = false;
 
   loginForm = new FormGroup({
-    username: new FormControl('guest@apex.com', [Validators.required]),
+    email: new FormControl('guest@apex.com', [Validators.required]),
     password: new FormControl('Password', [Validators.required]),
     rememberMe: new FormControl(true)
   });
@@ -48,17 +48,15 @@ export class LoginPageComponent {
         fullScreen: true
       });
 
-    this.authService.signinUser(this.loginForm.value.username, this.loginForm.value.password)
-      .then((res) => {
-        this.spinner.hide();
-        this.router.navigate(['/dashboard/dashboard1']);
-      })
-      .catch((err) => {
-        this.isLoginFailed = true;
-        this.spinner.hide();
-        console.log('error: ' + err)
-      }
-      );
+    this.authService.login(this.loginForm.value).subscribe((res) => {
+      console.log(res)
+      this.spinner.hide();
+      this.router.navigate(['/dashboard/dashboard1']);
+    },(err) => {
+      this.isLoginFailed = true;
+      this.spinner.hide();
+      console.log('error: ', err)
+    });
   }
 
 }

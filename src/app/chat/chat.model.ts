@@ -34,12 +34,14 @@ export class Chat {
   public time: string;
   public messages: string[];
   public messageType: string; // text, audio, video
+  public chatId: string;
 
-  constructor(isReceived: boolean, time: string, messages: string[], messageType: string) {
+  constructor(isReceived: boolean, time: string, messages: string[], messageType: string, chatId: string) {
     this.isReceived = isReceived;
     this.time = time;
     this.messages = messages;
     this.messageType = messageType;
+    this.chatId = chatId;
   }
 }
 

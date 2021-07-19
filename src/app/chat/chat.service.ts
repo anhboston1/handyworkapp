@@ -8,9 +8,9 @@ import { environment } from 'environments/environment';
 export class ChatService {
 
   constructor(private auth: AuthService, private http: HttpClient) { 
-    console.log("ChatService auth.getCurrentUser(): ", auth.getCurrentUser());
+    //console.log("ChatService auth.getCurrentUser(): ", auth.getCurrentUser());
     this.getChatConversations().subscribe((res) => {
-      console.log("his.getChatConversations() = ", res);
+      //console.log("his.getChatConversations() = ", res);
       let temp:any = res;
       //this.usersChat = [];
       temp.forEach(element => {
@@ -21,11 +21,14 @@ export class ChatService {
   }
   obsInterval: any;
   startObservables() {
-    //this.checkObservables();
+    this.getChatConversations().subscribe((res) => {
+      let temp:any = res;
+      temp.forEach(element => {
+        this.getConverstionDetail(element);
+      });
+    })
     this.obsInterval = setInterval(() => {
-      //this.usersChat = [];
       this.getChatConversations().subscribe((res) => {
-        console.log("his.getChatConversations() = ", res);
         let temp:any = res;
         temp.forEach(element => {
           this.getConverstionDetail(element);
@@ -36,8 +39,8 @@ export class ChatService {
   }
   stopObservers() {
     clearInterval(this.obsInterval)
-}
-  //chatConversations = [];
+  }
+
   getSenerName(paticipants:any){
     let name = "";
     paticipants.forEach(element => {
@@ -45,7 +48,6 @@ export class ChatService {
         name = element.name;
       }
     });
-    console.log("getSenerName = " + name);
     return name;
   }
   getSenderEmail(paticipants:any){
@@ -55,13 +57,12 @@ export class ChatService {
         id = element.email;
       }
     });
-    console.log("getSenerEmail = " + id);
+    //console.log("getSenerEmail = " + id);
     return id;
   }
   public getConverstionDetail(element) {
     this.http.get(`${environment.apiUrl}/chat-conversations/${element.ChatConversationId}`).subscribe((res) =>{
-      console.log("getConverstionDetail ", res);
-      //this.chatConversations.push(res);
+      //console.log("getConverstionDetail ", res);
       let temp:any = res;
       let senderEmail = this.getSenderEmail(temp.participants);
       
@@ -87,7 +88,6 @@ export class ChatService {
         this.usersChat.push(chatConv);
       }
 
-      console.log("chatConv = ", chatConv);
       this.getConversationMessages(temp.id).subscribe((retVal) => {
         console.log("getConversationMessages ", retVal);
         let temp:any = retVal;
@@ -101,12 +101,16 @@ export class ChatService {
           [
             element.message
           ],
-          'text');
+          'text',
+          element.id
+          );
 
           //check if the message already in the chats, skip if it exist, other wie insert.
-          chatConv.chats.push(mychat);
-
-          console.log("this.usersChat = ", this.usersChat);
+          let temp_val = chatConv.chats.filter(ele => ele.chatId === mychat.chatId);
+          if (temp_val.length == 0) {
+            chatConv.chats.push(mychat);
+          }
+          //console.log("this.usersChat = ", this.usersChat);
         });
         
       });
@@ -115,7 +119,7 @@ export class ChatService {
   
   //chat1: Chat[] = [];
   getConversationMessages(id){
-    return this.http.get(`${environment.apiUrl}/chat-conversations/${id}/chat-messages`);
+    return this.http.get(`${environment.apiUrl}/chat-conversations/${id}/chat-messages?filter[order]=timestamp%20ASC`);
     
   }
   public getChatConversations(){
@@ -128,7 +132,7 @@ export class ChatService {
       [
         ''
       ],
-      'text')
+      'text', "1")
   ]; 
   
  //public usersChat: UsersChat[];

@@ -39,21 +39,26 @@ export class ChatComponent implements OnInit, OnDestroy {
     private configService: ConfigService, private cdr: ChangeDetectorRef,
     private chatService: ChatService) {
     this.config = this.configService.templateConf;
-   this.usersChat = chatService.usersChat;
-    this.activeChat = chatService.usersChat.find(_ => _.isActiveChat);
-    this.chats = this.activeChat.chats;
-    this.activeChatUser = this.activeChat.name;
-    this.activeChatUserImg = this.activeChat.avatar;
-
-    this.loggedInUserImg = "assets/img/portrait/small/avatar-s-1.png"
-    this.renderer.addClass(this.document.body, "chat-application")
-  
-    this.obsInterval = setInterval(() => {
+    if (chatService.usersChat.length > 0) {
       this.usersChat = chatService.usersChat;
       this.activeChat = chatService.usersChat.find(_ => _.isActiveChat);
       this.chats = this.activeChat.chats;
       this.activeChatUser = this.activeChat.name;
       this.activeChatUserImg = this.activeChat.avatar;
+    }
+
+
+    this.loggedInUserImg = "assets/img/portrait/small/avatar-s-1.png"
+    this.renderer.addClass(this.document.body, "chat-application")
+  
+    this.obsInterval = setInterval(() => {
+      if (chatService.usersChat.length > 0) {
+        this.usersChat = chatService.usersChat;
+        this.activeChat = chatService.usersChat.find(_ => _.isActiveChat);
+        this.chats = this.activeChat.chats;
+        this.activeChatUser = this.activeChat.name;
+        this.activeChatUserImg = this.activeChat.avatar;
+      }
       this.cdr.detectChanges();
     }, 1000);
   } 

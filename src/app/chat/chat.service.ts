@@ -9,8 +9,9 @@ export class ChatService {
 
   constructor(private auth: AuthService, private http: HttpClient) { 
     //console.log("ChatService auth.getCurrentUser(): ", auth.getCurrentUser());
+    this.usersChat = [];
     this.getChatConversations().subscribe((res) => {
-      //console.log("his.getChatConversations() = ", res);
+      console.log("his.getChatConversations() = ", res);
       let temp:any = res;
       //this.usersChat = [];
       temp.forEach(element => {
@@ -62,7 +63,7 @@ export class ChatService {
   }
   public getConverstionDetail(element) {
     this.http.get(`${environment.apiUrl}/chat-conversations/${element.ChatConversationId}`).subscribe((res) =>{
-      //console.log("getConverstionDetail ", res);
+      console.log("getConverstionDetail ", res);
       let temp:any = res;
       let senderEmail = this.getSenderEmail(temp.participants);
       

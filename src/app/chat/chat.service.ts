@@ -22,6 +22,7 @@ export class ChatService {
   }
   obsInterval: any;
   startObservables() {
+    this.stopObservers();
     this.getChatConversations().subscribe((res) => {
       let temp:any = res;
       temp.forEach(element => {

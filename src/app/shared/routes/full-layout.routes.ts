@@ -18,5 +18,13 @@ export const Full_ROUTES: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('../../chat/chat.module').then(m => m.ChatModule)
-  }
+  },
+  {
+    path: 'projectList',
+    loadChildren: () => import('../../project/project-list/project-list.module').then(m => m.ProjectListModule)
+  },
+  {
+    path: 'projectNew',
+    loadChildren: () => import('../../project/project-new/project-new.module').then(m => m.ProjectNewModule)
+  },
 ];

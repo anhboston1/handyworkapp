@@ -58,6 +58,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chats = this.activeChat.chats;
         this.activeChatUser = this.activeChat.name;
         this.activeChatUserImg = this.activeChat.avatar;
+        clearInterval(this.obsInterval);
       }
       this.cdr.detectChanges();
     }, 1000);
@@ -76,7 +77,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   //send button function calls
   onAddMessage() {
-
     let message = {
       "sender": this.auth.getCurrentUser().email,
       "chatConversationId": this.activeChat.conversationId,
@@ -85,7 +85,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
     console.log(message);
     this.http.post(`${environment.apiUrl}/chat-messages`, message).subscribe((res) => {
-
+      this.chatService.startObservables();
     });
 
     this.chatService.stopObservers();

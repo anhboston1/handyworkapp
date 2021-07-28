@@ -34,7 +34,16 @@ export class AuthService {
   signupUser(email: string, password: string) {
     //your code for signing up the new user
   }
-
+  signup(data) {
+    let _data = {
+      email: data.email,
+      password: data.password,
+      firstName: data.firstname,
+      lastName: data.lastname
+    }
+    console.log(_data);
+    return this.http.post(`${environment.apiUrl}/users/signup`, _data, { responseType: 'text' });
+  }
   signinUser(email: string, password: string) {
     //your code for checking credentials and getting tokens for for signing in user
     // return this._firebaseAuth.signInWithEmailAndPassword(email, password)

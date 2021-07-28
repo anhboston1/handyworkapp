@@ -4,6 +4,7 @@ import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angula
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../../../shared/directives/must-match.validator';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -14,11 +15,12 @@ import { Router } from '@angular/router';
 export class RegisterPageComponent implements OnInit {
   registerFormSubmitted = false;
   registerForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -36,10 +38,11 @@ export class RegisterPageComponent implements OnInit {
   //  On submit click, reset field value
   onSubmit() {
     this.registerFormSubmitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
-
-    this.router.navigate(['/pages/login']);
+    
+    console.log(this.registerForm.value);
+    this.authService.signup(this.registerForm.value).subscribe(data => {
+      this.router.navigate(['/pages/login']);
+    });
+    
   }
 }

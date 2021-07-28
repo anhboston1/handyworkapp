@@ -58,10 +58,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chats = this.activeChat.chats;
         this.activeChatUser = this.activeChat.name;
         this.activeChatUserImg = this.activeChat.avatar;
-        clearInterval(this.obsInterval);
+        //clearInterval(this.obsInterval);
       }
       this.cdr.detectChanges();
-    }, 1000);
+    }, 5000);
   } 
   obsInterval: any;
   ngOnInit() {

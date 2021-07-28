@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-//import { FileUploader } from 'ng2-file-upload';
-//const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+import { NgSelectModule, NgOption } from '@ng-select/ng-select';
 @Component({
   selector: 'app-project-new',
   templateUrl: './project-new.component.html',
@@ -10,27 +9,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ProjectNewComponent implements OnInit {
 
-/*   uploader: FileUploader = new FileUploader({
-    url: URL,
-    isHTML5: true
-  });
-  hasBaseDropZoneOver = false;
-  hasAnotherDropZoneOver = false;
+  services = [
+    { id: 1, name: 'Plumping' },
+    { id: 2, name: 'Kitchen' },
+    { id: 3, name: 'Bathrooms' },
+    { id: 4, name: 'Winows & Doors' },
+    { id: 5, name: 'Roofing' },
+    { id: 5, name: 'Gutters' },
+    { id: 6, name: 'Electrical' },
+    { id: 7, name: 'Landscape' },
+    { id: 5, name: 'Painting' },
+    { id: 5, name: 'Swimming Pool' },
+    { id: 5, name: 'Concrete, Brick, Stone' },
+    { id: 5, name: 'Decks & Porches' },
+    { id: 5, name: 'Siding' },
+    { id: 5, name: 'Fences' },
+    { id: 5, name: 'Flooring' },
+    { id: 5, name: 'HVAC' },
+    { id: 5, name: 'Tile' },
+    { id: 5, name: 'Walls / Ceiling' },
+    { id: 5, name: 'Additions & Remodels' },
+  ];
+  selectedService: any = " Plumping";
+  selectedCityIds: string[];
+  selectedCityName = 'Vilnius';
+  selectedCityId: number;
 
-  // Angular2 File Upload
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
-
-  fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  } */
   generalFormSubmitted = false;
   generalForm = new FormGroup({
-    username: new FormControl('hermione007', [Validators.required]),
-    name: new FormControl('Hermione Granger', [Validators.required]),
-    email: new FormControl('granger007@hogward.com', [Validators.required]),
-    company: new FormControl('', [Validators.required])
+    projectname: new FormControl('Name your project', [Validators.required]),
+    projectdescription: new FormControl('Describe your project', [Validators.required]),
+    street: new FormControl('Street', [Validators.required]),
+    city: new FormControl('City', [Validators.required]),
+    zipcode: new FormControl('Zipcode', [Validators.required])
   });
   infoFormSubmitted = false;
   alertVisible = true;
@@ -43,10 +54,20 @@ export class ProjectNewComponent implements OnInit {
     return this.generalForm.controls;
   }
 
-onGeneralFormSubmit() {
+  onGeneralFormSubmit() {
     this.generalFormSubmitted = true;
     if (this.generalForm.invalid) {
       return;
     }
+  }
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
+
+  selectFiles(event): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+    console.log("this.selectedFiles = ", this.selectedFiles);
   }
 }

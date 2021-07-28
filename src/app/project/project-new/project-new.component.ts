@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgSelectModule, NgOption } from '@ng-select/ng-select';
+import { ProjectService } from '../project.service';
+
 @Component({
   selector: 'app-project-new',
   templateUrl: './project-new.component.html',
@@ -30,10 +32,7 @@ export class ProjectNewComponent implements OnInit {
     { id: 5, name: 'Walls / Ceiling' },
     { id: 5, name: 'Additions & Remodels' },
   ];
-  selectedService: any = " Plumping";
-  selectedCityIds: string[];
-  selectedCityName = 'Vilnius';
-  selectedCityId: number;
+  selectedService: any = { id: 1, name: 'Plumping' };
 
   generalFormSubmitted = false;
   generalForm = new FormGroup({
@@ -45,7 +44,7 @@ export class ProjectNewComponent implements OnInit {
   });
   infoFormSubmitted = false;
   alertVisible = true;
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
   }
@@ -59,6 +58,24 @@ export class ProjectNewComponent implements OnInit {
     if (this.generalForm.invalid) {
       return;
     }
+
+    let data = {
+      name: this.generalForm.value.projectname,
+      description:  this.generalForm.value.projectdescription,
+      status: "Approved",
+      service_category: this.selectedService.name,
+      street:  this.generalForm.value.street,
+      city:  this.generalForm.value.city,
+      zipcode:  this.generalForm.value.zipcode,
+      userId: "5cbdf2d2-327a-4dd0-a18d-aa1e47043856"
+    }
+    console.log("data = ", data);
+    console.log("generalForm =", this.generalForm);
+    //Post project
+    this.projectService.create(data).subscribe((res) => {
+      alert(JSON.stringify(res));
+    })
+    //Upload file
   }
   selectedFiles?: FileList;
   progressInfos: any[] = [];

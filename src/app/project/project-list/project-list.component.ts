@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { DatatableData } from './data/datatables.data';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ChangeDetectorRef } from '@angular/core';
+//import { DatatableData } from './data/datatables.data';
 import {
   ColumnMode,
   DatatableComponent,
@@ -7,7 +7,7 @@ import {
 } from '@swimlane/ngx-datatable';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
+import { ProjectService } from '../project.service';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -21,32 +21,31 @@ export class ProjectListComponent implements OnInit {
    *
    * @param {HttpClient} http
    */
-  constructor(private http: HttpClient) {
-    this.tempData = DatatableData;
-    this.multiPurposeTemp = DatatableData;
+
+   public projects: any = [];
+  constructor(private http: HttpClient, private projectService: ProjectService, private cdr: ChangeDetectorRef) {
+    //this.tempData = DatatableData;
+    //this.multiPurposeTemp = DatatableData;
+
+    this.projectService.getMyProjects("5cbdf2d2-327a-4dd0-a18d-aa1e47043856").subscribe((res) => {
+      console.log("My Projects = ", res);
+      this.projects = res;
+      let temps: any = res;
+      this.tempData = temps;
+      this.rows = this.projects;
+      this.cdr.detectChanges();
+    });
   }
 
   public contentHeader: object;
 
   // row data
-  public rows = DatatableData;
-
-  // column header
-  public columns = [
-    { name: 'Name', prop: 'full_name' },
-    { name: 'Email', prop: 'email' },
-    { name: 'Age', prop: 'age' },
-    { name: 'Salary', prop: 'salary' }
-  ];
-
-  // multi Purpose datatable Row data
-  public multiPurposeRows = DatatableData;
+  public rows = this.projects;//DatatableData;
 
   public ColumnMode = ColumnMode;
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   @ViewChild('tableRowDetails') tableRowDetails: any;
-  @ViewChild('tableResponsive') tableResponsive: any;
 
   public expanded: any = {};
 
@@ -55,12 +54,9 @@ export class ProjectListComponent implements OnInit {
   public chkBoxSelected = [];
   public SelectionType = SelectionType;
 
-  // server side row data
-  public serverSideRowData;
 
   // private
   private tempData = [];
-  private multiPurposeTemp = [];
 
   /**
    * filterUpdate
@@ -72,7 +68,7 @@ export class ProjectListComponent implements OnInit {
 
     // filter our data
     const temp = this.tempData.filter(function (d) {
-      return d.full_name.toLowerCase().indexOf(val) !== -1 || !val;
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
 
     // update the rows
@@ -97,20 +93,6 @@ export class ProjectListComponent implements OnInit {
    *
    * @param event
    */
-  MultiPurposeFilterUpdate(event) {
-    const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.multiPurposeTemp.filter(function (d) {
-      return d.full_name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.multiPurposeRows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-  }
-
 
 
   // Lifecycle Hooks

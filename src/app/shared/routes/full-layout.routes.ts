@@ -27,4 +27,12 @@ export const Full_ROUTES: Routes = [
     path: 'projectNew',
     loadChildren: () => import('../../project/project-new/project-new.module').then(m => m.ProjectNewModule)
   },
+  {
+    path: 'bidproject',
+    loadChildren: () => import('../../project/newprojectbid/newprojectbid.module').then(m => m.NewprojectbidModule)
+  },
+  {
+    path: 'projectbids',
+    loadChildren: () => import('../../project/projectbids/projectbid.module').then(m => m.ProjectbidModule)
+  }
 ];

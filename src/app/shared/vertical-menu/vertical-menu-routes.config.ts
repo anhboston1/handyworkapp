@@ -9,4 +9,6 @@ export const ROUTES: RouteInfo[] = [
   },
   { path: '/chat', title: 'Chat', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
   { path: '/projectList', title: 'My Projects', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/bidproject', title: 'Bid The Project', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+  { path: '/projectbids', title: 'Project Detail & Bids', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
  ] ;

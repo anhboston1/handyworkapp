@@ -8,6 +8,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ProjectService } from '../project.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
@@ -23,11 +24,13 @@ export class ProjectListComponent implements OnInit {
    */
 
    public projects: any = [];
-  constructor(private http: HttpClient, private projectService: ProjectService, private cdr: ChangeDetectorRef) {
+  constructor(private http: HttpClient, 
+    private router: Router,
+    private projectService: ProjectService, private cdr: ChangeDetectorRef) {
     //this.tempData = DatatableData;
     //this.multiPurposeTemp = DatatableData;
 
-    this.projectService.getMyProjects("5cbdf2d2-327a-4dd0-a18d-aa1e47043856").subscribe((res) => {
+    this.projectService.getMyProjects().subscribe((res) => {
       console.log("My Projects = ", res);
       this.projects = res;
       let temps: any = res;
@@ -36,7 +39,13 @@ export class ProjectListComponent implements OnInit {
       this.cdr.detectChanges();
     });
   }
-
+  loadprojectbids(row){
+    console.log(row);
+    this.router.navigate(['/bidproject'], { queryParams: { projectid: row.id, projectname: row.description}});
+  }
+  /*
+this.router.navigate(['/add-device-description'], { queryParams: { scannedCode: this.tempObj.scannedCode, serialCode: this.tempObj.serialCode} });
+  */
   public contentHeader: object;
 
   // row data

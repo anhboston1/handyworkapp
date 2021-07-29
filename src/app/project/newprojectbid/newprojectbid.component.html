@@ -3,42 +3,62 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                            <div class="col-12 form-group">
-                                <label for="username">You will be able to edit your bid until the project is awarded to someone else.</label>
-                            </div>
-                            
-                                <div class="col-6 form-group">
-                                    <label for="projectname">Bid Amount</label>
-                                    <div class="controls">
-                                        <input type="text" formControlName="projectname" class="form-control" placeholder="Username"
-                                        >
-                                        
-                                    </div>
+                            <div class="row">
+                                <div class="col-12 form-group" >
+                                    <p>Project detail: {{projectname}} </p>
                                 </div>
-                                <div class="col-6 form-group">
-                                        <label for="projectname">This project will be delivered in</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" placeholder="Username" >
+                            </div>
+
+                            <div class="row">
+                            <div class="col-12 form-group" >
+                                <p>You will be able to edit your bid until the project is awarded to someone else.</p>
+                            </div>
+                            </div>
+                            <div class="row" style="margin-top: -10px;">
+                                <div class="col-12 col-md-6 col-sm-6 form-group">
+                                    <div class="form-group row">
+                                        <p class="col-md-12" style="margin-bottom: 5px;">Bid Amounts</p>
+                                        <div class="col-md-12">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text">$</span>
+                                            </div>
+                                            <input type="text" id="bordered-form-3" class="form-control">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text">.00</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-sm-6 form-group">
+                                    <div class="form-group row">
+                                        <p class="col-md-12" style="margin-bottom: 5px;">This project will be done in</p>
+                                        <div class="col-md-12">
+                                            <div class="input-group">
                                             
+                                            <input type="text" id="bordered-form-3" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Days</span>
+                                            </div>
+                                            </div>
+                                        </div>
                                         </div>
                                 </div>
-                                
-    
+                            </div>
+                            <div class="row" style="margin-top: -20px;">
                                 <div class="col-12 form-group">
-                                    <label for="street">Describe your proposal</label>
+                                    <p style="margin-bottom: 5px;">Describe your proposal</p>
                                     <div class="controls">
-                                            <textarea formControlName="projectdescription" class="form-control" class="form-control" style="height: 100px;" 
+                                            <textarea class="form-control"  style="height: 100px;" 
                                             >
                                             </textarea>
                                     </div>
                                 </div>
-
+                            </div>
                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                   <button type="submit" class="btn btn-primary mr-sm-2 mb-1">Place Bid</button>
                                 </div>
-    
-                       
-    
                     </div>
                 </div>  
             </div>  

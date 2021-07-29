@@ -64,9 +64,9 @@
                 <ngx-datatable-column class="bg-light-info" name="Status" prop="status" [width]="100"></ngx-datatable-column>
 
                 <ngx-datatable-column name="Actions" [width]="70">
-                  <ng-template ngx-datatable-cell-template>
+                  <ng-template ngx-datatable-cell-template let-row="row">
 <!--                     <i class="ft-more-vertical text-primary cursor-pointer mr-2"></i> -->
-                    <i class="ft-edit text-primary cursor-pointer"></i>
+                    <i class="ft-edit text-primary cursor-pointer" (click)="loadprojectbids(row)"></i>
                   </ng-template>
                 </ngx-datatable-column>
               </ngx-datatable>

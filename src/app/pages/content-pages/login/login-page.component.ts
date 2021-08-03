@@ -17,7 +17,7 @@ export class LoginPageComponent {
   isLoginFailed = false;
 
   loginForm = new FormGroup({
-    email: new FormControl('guest@apex.com', [Validators.required]),
+    email: new FormControl('pnguyen2k@yahoo.com', [Validators.required]),
     password: new FormControl('Password', [Validators.required]),
     rememberMe: new FormControl(true)
   });

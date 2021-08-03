@@ -19,4 +19,7 @@ export class ProjectService {
   getMyProjects() {
     return this.http.get(`${environment.apiUrl}/users/${this.auth.getCurrentUser().id}/projects`);
   }
+  bidproject(data) {
+    return this.http.post(`${environment.apiUrl}/projectbids`, data, { responseType: 'text' });
+  }
 }

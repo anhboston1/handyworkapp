@@ -23,7 +23,7 @@
                                             <div class="input-group-prepend">
                                               <span class="input-group-text">$</span>
                                             </div>
-                                            <input type="text" id="bordered-form-3" class="form-control">
+                                            <input type="text" id="bordered-form-3" class="form-control" [(ngModel)]="bidamount">
                                             <div class="input-group-append">
                                               <span class="input-group-text">.00</span>
                                             </div>
@@ -35,9 +35,8 @@
                                     <div class="form-group row">
                                         <p class="col-md-12" style="margin-bottom: 5px;">This project will be done in</p>
                                         <div class="col-md-12">
-                                            <div class="input-group">
-                                            
-                                            <input type="text" id="bordered-form-3" class="form-control">
+                                            <div class="input-group">                                           
+                                            <input type="text" id="bordered-form-3" class="form-control" [(ngModel)]="daycomplete">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">Days</span>
                                             </div>
@@ -50,14 +49,14 @@
                                 <div class="col-12 form-group">
                                     <p style="margin-bottom: 5px;">Describe your proposal</p>
                                     <div class="controls">
-                                            <textarea class="form-control"  style="height: 100px;" 
+                                            <textarea class="form-control"  style="height: 100px;" [(ngModel)]="proposal"
                                             >
                                             </textarea>
                                     </div>
                                 </div>
                             </div>
                                 <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                  <button type="submit" class="btn btn-primary mr-sm-2 mb-1">Place Bid</button>
+                                  <button type="submit" class="btn btn-primary mr-sm-2 mb-1" (click)="bidproject()">Place Bid</button>
                                 </div>
                     </div>
                 </div>  

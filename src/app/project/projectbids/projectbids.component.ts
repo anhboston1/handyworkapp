@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../shared/auth/auth.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-projectbids',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectbidsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, 
+    private route: ActivatedRoute, 
+    private auth: AuthService,
+    private projectService: ProjectService
+    ) { }
 
   ngOnInit(): void {
   }

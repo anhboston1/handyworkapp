@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "start:server": "ts-node -O '{\"module\":\"commonjs\"}' server.ts"
   },
   "private": true,
   "dependencies": {
@@ -80,9 +81,12 @@
     "prismjs": "^1.23.0",
     "pug": "3.0.2",
     "quill": "1.3.7",
+    "request": "^2.88.2",
     "resize-observer-polyfill": "1.5.1",
     "rxjs": "6.6.3",
     "screenfull": "5.0.2",
+    "socket.io": "^4.0.0",
+    "socket.io-client": "^4.0.0",
     "sweetalert2": "10.11.1",
     "swiper": "^6.7.5",
     "tslib": "2.2.0",

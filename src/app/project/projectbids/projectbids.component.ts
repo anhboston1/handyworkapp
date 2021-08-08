@@ -9,7 +9,7 @@ import { ProjectService } from '../project.service';
   styleUrls: ['./projectbids.component.scss']
 })
 export class ProjectbidsComponent implements OnInit {
-
+  projectname = "ipsome";
   constructor(private router: Router, 
     private route: ActivatedRoute, 
     private auth: AuthService,

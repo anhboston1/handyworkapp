@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../shared/auth/auth.service';
 import { environment } from 'environments/environment';
-
+import { ChatsocketService } from './chatsocket.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -34,10 +34,16 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   messages = new Array();
   item: number = 0;
-  constructor(private elRef: ElementRef, private renderer: Renderer2, private auth: AuthService, private http: HttpClient,
-    @Inject(DOCUMENT) private document: Document,
-    private configService: ConfigService, private cdr: ChangeDetectorRef,
-    private chatService: ChatService) {
+  constructor(private elRef: ElementRef, 
+    private renderer: Renderer2, 
+    private auth: AuthService, 
+    private http: HttpClient,
+    @Inject(DOCUMENT) 
+    private document: Document,
+    private configService: ConfigService, 
+    private cdr: ChangeDetectorRef,
+    private chatService: ChatService,
+    private chatSocketService: ChatsocketService) {
     this.config = this.configService.templateConf;
     if (chatService.usersChat.length > 0) {
       this.usersChat = chatService.usersChat;

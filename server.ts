@@ -21,6 +21,8 @@ interface Message {
     receiverId: string;
     conversationId: string;
     sendername: string;
+    message: string;
+    timestamp: Date;
 }
 
 interface Todo {
@@ -67,11 +69,7 @@ interface Todo {
 
         let receiverSocket = userSockets.filter(x => x.conversationId === conversationId && x.userId === receiverId);
         if (receiverSocket.length > 0) {
-            socket.to(receiverSocket[0].socketId).emit(`privatemessage`, {
-                error : false,
-                singleUser : false,
-                chatList : data
-            });
+            socket.to(receiverSocket[0].socketId).emit(`privatemessage`, data);
         }
 
         //Update database with the new message

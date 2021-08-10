@@ -33,8 +33,7 @@ var userInfo: UserInfo;
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./chat.component.scss'],
-  providers: [ChatService]
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
 

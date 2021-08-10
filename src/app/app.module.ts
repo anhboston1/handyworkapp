@@ -32,7 +32,7 @@ import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
 import { ManageUsersComponent } from './admin/manage-users/manage-users.component';
 import { ManageProjectsComponent } from './admin/manage-projects/manage-projects.component';
-
+import { ChatService } from './chat/chat.service';
 
 var firebaseConfig = {
   apiKey: "YOUR_API_KEY", //YOUR_API_KEY
@@ -82,6 +82,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [
     AuthService,
+    ChatService,
     AuthGuard,
     DragulaService,
     {

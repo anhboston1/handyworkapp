@@ -30,6 +30,8 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { WINDOW_PROVIDERS } from './shared/services/window.service';
+import { ManageUsersComponent } from './admin/manage-users/manage-users.component';
+import { ManageProjectsComponent } from './admin/manage-projects/manage-projects.component';
 
 
 var firebaseConfig = {
@@ -54,7 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent],
+  declarations: [AppComponent, FullLayoutComponent, ContentLayoutComponent, ManageUsersComponent, ManageProjectsComponent],
   imports: [
     BrowserAnimationsModule,
     StoreModule.forRoot(fromApp.appReducer),

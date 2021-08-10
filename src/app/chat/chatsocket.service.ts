@@ -22,19 +22,30 @@ interface Message {
 })
 
 export class ChatsocketService {
-  private socket: Socket;
+  private socket: Socket = null;
   constructor() {
+    
+   }
+
+   public initializeSocket() {
+    this.sendisconnected();
     this.socket = io("http://localhost:8080");
     this.socket.on("privatemessage", (data: any) => {
-
+      console.log("Receiving meassage from my friend: " + JSON.stringify(data))
     })
    }
 
-   protected sendMessage(data: Message) {
+   public sendMessage(data) {
     this.socket.emit("privatemessage", data);
    }
 
-   protected sendUserInfo(data: UserInfo) {
+   public sendUserInfo(data: UserInfo) {
     this.socket.emit("myinfo", data);
+   }
+
+   public sendisconnected(){
+    if (this.socket !== null) {
+      this.socket.emit("user logout", {});
+    }
    }
 }

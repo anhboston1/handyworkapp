@@ -18,7 +18,7 @@ export class ChatService {
         this.getConverstionDetail(element);
       });
     });
-    this.startObservables();
+    //this.startObservables();
   }
   obsInterval: any;
   startObservables() {
@@ -62,6 +62,16 @@ export class ChatService {
     //console.log("getSenerEmail = " + id);
     return id;
   }
+  getSenderId(paticipants:any){
+    let id = "";
+    paticipants.forEach(element => {
+      if (element.id !== this.auth.getCurrentUser().id) {
+        id = element.id;
+      }
+    });
+    //console.log("getSenerEmail = " + id);
+    return id;
+  }
   public getConverstionDetail(element) {
     this.http.get(`${environment.apiUrl}/chat-conversations/${element.ChatConversationId}`).subscribe((res) =>{
       console.log("getConverstionDetail ", res);
@@ -71,6 +81,7 @@ export class ChatService {
       var chatConv: UsersChat = {
         userId: temp.id,
         conversationId: temp.id,
+        receiverId: this.getSenderId(temp.participants),
         name: this.getSenerName(temp.participants),
         avatar: "assets/img/portrait/small/avatar-s-2.png",
         lastChatTime: "9:04 PM",
@@ -142,6 +153,7 @@ export class ChatService {
     {
       userId: "1",
       conversationId: "1",
+      receiverId: "1",
       name: "Phuong",
       avatar: "assets/img/portrait/small/avatar-s-2.png",
       lastChatTime: "9:04 PM",

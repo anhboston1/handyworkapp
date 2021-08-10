@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import * as Chartist from 'chartist';
 import { ChartType, ChartEvent } from "ng-chartist";
 import ChartistTooltip from 'chartist-plugin-tooltips-updated';
+import { AuthService } from 'app/shared/auth/auth.service';
+import { ChatService } from 'app/chat/chat.service';
 
 declare var require: any;
 
@@ -19,11 +21,16 @@ export interface Chart {
 @Component({
   selector: 'app-dashboard1',
   templateUrl: './dashboard1.component.html',
-  styleUrls: ['./dashboard1.component.scss']
+  styleUrls: ['./dashboard1.component.scss'],
+  providers: [ChatService]
 })
 
 export class Dashboard1Component {
-
+  constructor (
+    private auth: AuthService, 
+    private chatService: ChatService,
+) {
+}
   // Line area chart configuration Starts
   lineArea: Chart = {
     type: 'Line',

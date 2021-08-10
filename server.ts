@@ -37,21 +37,26 @@ interface Todo {
       //User will emit 'myinfo' event so server keep track user info
       socket.on('myinfo', (userData: UserInfo) => {
         console.log("Received myinfo event...")
-        //userSockets = userSockets.filter(x => x.userId !== userData.userId);
-        let userSocket = userSockets.filter(x => x.socketId === socket.id);
-        if (userSocket.length === 0) {
-            let tmp: UserInfo = userData;
-            tmp.socketId = socket.id;
-            userSockets.push(tmp);
-            socket.broadcast.emit('user login', {
-                username: userData.username,
-                message: userData
-              });
+        let userSocket = userSockets.filter(x => x.userId === userData.userId && x.conversationId == userData.conversationId);
+        if (userSocket.length > 0) {
+          console.log("Received myinfo event... replacing socket")
+          userSocket[0].socketId = socket.id;
         }
         else {
-            console.log ("User try to emit 'myinfo' more then once")
+          userSocket = userSockets.filter(x => x.socketId === socket.id);
+          if (userSocket.length === 0) {
+              let tmp: UserInfo = userData;
+              tmp.socketId = socket.id;
+              userSockets.push(tmp);
+              socket.broadcast.emit('user login', {
+                  username: userData.username,
+                  message: userData
+                });
+          }
+          else {
+              console.log ("User try to emit 'myinfo' more then once")
+          }
         }
-
         console.log("Number of sockets: " + userSockets.length);
         console.log("Number of sockets: " + JSON.stringify(userSockets));
       }); 
@@ -64,7 +69,7 @@ interface Todo {
         let receiverSocket = userSockets.filter(x => x.conversationId === conversationId && x.userId === receiverId);
         console.log("receiverSocket.length =  " + receiverSocket.length);
         console.log("Number of sockets: " + JSON.stringify(userSockets));
-        
+
         if (receiverSocket.length > 0) {
           console.log("Sending to socketId ")
             console.log("Sending too socketId = " + receiverSocket[0].socketId);

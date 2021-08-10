@@ -13,12 +13,11 @@ export class ChatService {
     this.getChatConversations().subscribe((res) => {
       console.log("his.getChatConversations() = ", res);
       let temp:any = res;
-      //this.usersChat = [];
       temp.forEach(element => {
         this.getConverstionDetail(element);
       });
     });
-    //this.startObservables();
+    this.startObservables();
   }
   obsInterval: any;
   startObservables() {
@@ -36,7 +35,7 @@ export class ChatService {
           this.getConverstionDetail(element);
         });
       })
-    }, 10000);
+    }, 60000);
     
   }
   stopObservers() {
@@ -101,7 +100,7 @@ export class ChatService {
         this.usersChat.push(chatConv);
       }
 
-      this.getConversationMessages(temp.id).subscribe((retVal) => {
+       this.getConversationMessages(temp.id).subscribe((retVal) => {
         console.log("getConversationMessages ", retVal);
         let temp:any = retVal;
         temp.forEach(element => {
@@ -126,19 +125,19 @@ export class ChatService {
           //console.log("this.usersChat = ", this.usersChat);
         });
         
-      });
+      }); 
     })
   }
   
   //chat1: Chat[] = [];
   getConversationMessages(id){
-    return this.http.get(`${environment.apiUrl}/chat-conversations/${id}/chat-messages?filter[order]=timestamp%20ASC`);
+    return this.http.get(`${environment.apiUrl}/chat-conversations/${id}/chat-messages?filter[limit]=20&filter[order]=timestamp%20ASC`);
     
   }
   public getChatConversations(){
     return this.http.get(`${environment.apiUrl}/users/${this.auth.getCurrentUser().id}/user-chat-conversations`);
   }
-    public chat1: Chat[] = [
+  public chat1: Chat[] = [
     new Chat(
       false,
       '',

@@ -41,11 +41,9 @@ export class ProjectListComponent implements OnInit {
   }
   loadprojectbids(row){
     console.log(row);
-    this.router.navigate(['/bidproject'], { queryParams: { projectid: row.id, projectname: row.description}});
+    //this.router.navigate(['/bidproject'], { queryParams: { projectid: row.id, projectname: row.description}});
+    this.router.navigate(['/projectdetail'], { queryParams: { projectid: row.id, projectname: row.description}});
   }
-  /*
-this.router.navigate(['/add-device-description'], { queryParams: { scannedCode: this.tempObj.scannedCode, serialCode: this.tempObj.serialCode} });
-  */
   public contentHeader: object;
 
   // row data

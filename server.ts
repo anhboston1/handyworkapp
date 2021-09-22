@@ -88,8 +88,8 @@ interface Todo {
         axios
         .post('http://localhost:3000/chat-messages', testmessage)
         .then(res => {
-          //console.log(`statusCode: ${res}`)
-          //console.log(res)
+          console.log(`statusCode: ${res}`)
+          console.log(res)
         })
         .catch(error => {
           console.error(error)

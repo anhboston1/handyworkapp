@@ -32,7 +32,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../project/newprojectbid/newprojectbid.module').then(m => m.NewprojectbidModule)
   },
   {
-    path: 'projectbids',
+    path: 'projectdetail',
     loadChildren: () => import('../../project/projectbids/projectbid.module').then(m => m.ProjectbidModule)
   }
 ];

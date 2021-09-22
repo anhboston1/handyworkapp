@@ -22,4 +22,7 @@ export class ProjectService {
   bidproject(data) {
     return this.http.post(`${environment.apiUrl}/projectbids`, data, { responseType: 'text' });
   }
+  getProjectBids(projectId) {
+    return this.http.get(`${environment.apiUrl}/projects/${projectId}/projectbids`);
+  }
 }

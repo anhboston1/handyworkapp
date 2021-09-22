@@ -1,21 +1,50 @@
-<div class="row">
-    <div class="col-md-12">
+<!--Navs Starts-->
+<section id="navs">
+    <div class="row text-left">
+      <!--Basic navs Starts-->
+      <div class="col-md-12 col-lg-12">
         <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 form-group" >
-                            <p>Project detail: {{projectname}} </p>
-                        </div>
-                    </div>
+          <div class="card-header">
+            <h4 class="card-title">
+              {{projectname}}</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <ul ngbNav #basicnav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                  <a ngbNavLink>Detail</a>
+                  <ng-template ngbNavContent>
+                    <p>{{projectname}}</p>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                  <a ngbNavLink>Files</a>
+                  <ng-template ngbNavContent>
+                    <p></p>
+                  </ng-template>
+                </li>
+                <li [ngbNavItem]="3">
+                  <a ngbNavLink>Proposals</a>
+                  <ng-template ngbNavContent>
+                    <p>Contractor: Phuong Nguyen</p>
+                    <p>Rate</p>
 
-                    <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                        <button type="submit" class="btn btn-primary mr-sm-2 mb-1">Place Bid</button>
-                    </div>
-                </div>
-            </div>  
-        </div>  
+                    <h4>Comment</h4>
+                    <p><span>chat button</span> <span>award button</span></p>
+                  </ng-template>
+                </li>
+              </ul>
+  
+              <div [ngbNavOutlet]="basicnav" class="mt-2"></div>
+  <!-- 
+              <pre>Active: {{ active }}</pre> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Basic navs Ends-->
     </div>
-</div>  
 
-
+  </section>
+  <!--Navs Starts-->
+  
